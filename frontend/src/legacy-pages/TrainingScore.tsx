@@ -6,6 +6,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { useAuthStore } from '../store/useAuthStore';
 
+const asArray = (payload: unknown): any[] => {
+  if (Array.isArray(payload)) return payload;
+  if (payload && typeof payload === 'object') {
+    const value = payload as Record<string, unknown>;
+    for (const key of ['data', 'scores', 'personalScores', 'students', 'semesters']) {
+      if (Array.isArray(value[key])) return value[key] as any[];
+    }
+  }
+  return [];
+};
+
 const TrainingScore = () => {
   const { user } = useAuthStore();
   const isStudent = user?.role === 'STUDENT';
@@ -34,9 +45,10 @@ const TrainingScore = () => {
   const fetchSemesters = async () => {
     try {
       const res = await api.get('/semesters');
-      setSemesterOptions(res.data);
-      if (res.data.length > 0 && !semester) {
-        setSemester(res.data[0].name);
+      const semesters = asArray(res.data);
+      setSemesterOptions(semesters);
+      if (semesters.length > 0 && !semester) {
+        setSemester(semesters[0].name);
       }
     } catch (e) {
       console.error('Lỗi khi tải danh sách học kỳ');
@@ -46,7 +58,7 @@ const TrainingScore = () => {
   const fetchPersonalScores = async () => {
     try {
       const res = await api.get(`/training/student/${user?.studentId}`);
-      setPersonalScores(res.data);
+      setPersonalScores(asArray(res.data));
     } catch (error) {
       toast.error('Không thể tải điểm rèn luyện');
     } finally {
@@ -57,7 +69,7 @@ const TrainingScore = () => {
   const fetchStudents = async () => {
     try {
       const res = await api.get('/students');
-      setStudents(res.data);
+      setStudents(asArray(res.data));
     } catch (error) {
       toast.error('Không thể tải danh sách sinh viên');
     } finally {
@@ -69,7 +81,7 @@ const TrainingScore = () => {
     setSelectedStudent(student);
     try {
       const res = await api.get(`/training/student/${student.id}`);
-      const score = res.data.find((s: any) => (s.semester_id || s.semester?.name || s.semester) === semester);
+      const score = asArray(res.data).find((s: any) => (s.semester_id || s.semester?.name || s.semester) === semester);
       if (score) {
         setScores({
           y_thuc: score.y_thuc,
