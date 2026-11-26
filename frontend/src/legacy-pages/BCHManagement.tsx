@@ -553,7 +553,7 @@ const BCHManagement = () => {
                             <input
                               type="number"
                               className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none"
-                              value={assign.fromOrder}
+                              value={Number.isFinite(assign.fromOrder) ? assign.fromOrder : ''}
                               onChange={(e) => {
                                 const newAssigns = [...assignments];
                                 newAssigns[index].fromOrder = parseInt(e.target.value);
@@ -566,7 +566,7 @@ const BCHManagement = () => {
                             <input
                               type="number"
                               className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm outline-none"
-                              value={assign.toOrder}
+                              value={Number.isFinite(assign.toOrder) ? assign.toOrder : ''}
                               onChange={(e) => {
                                 const newAssigns = [...assignments];
                                 newAssigns[index].toOrder = parseInt(e.target.value);

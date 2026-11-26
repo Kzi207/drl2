@@ -5,8 +5,8 @@ import api, { apiBaseUrl, apiConfigError, setFallbackAuthToken } from '../api/ax
 import toast from 'react-hot-toast';
 import { Loader2, X } from 'lucide-react';
 
-const LOGIN_BACKGROUND_IMAGE_URL = String(import.meta.env.VITE_LOGIN_BACKGROUND_IMAGE_URL || '').trim();
-const LOGIN_LOGO_URL = String(import.meta.env.VITE_LOGIN_LOGO_URL || '/logo-qlsv.png').trim();
+const LOGIN_BACKGROUND_IMAGE_URL = String(process.env.NEXT_PUBLIC_LOGIN_BACKGROUND_IMAGE_URL || '').trim();
+const LOGIN_LOGO_URL = String(process.env.NEXT_PUBLIC_LOGIN_LOGO_URL || '/logo-qlsv.png').trim();
 
 const getSafeRedirectPath = (value: string | null) => {
   if (!value || !value.startsWith('/') || value.startsWith('//')) return '/';

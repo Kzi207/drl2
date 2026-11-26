@@ -3,7 +3,7 @@ import axios, { AxiosHeaders } from 'axios';
 const CSRF_STORAGE_KEY = 'csrf_token_fallback';
 const AUTH_TOKEN_STORAGE_KEY = 'qlsv_auth_token_fallback';
 const DEVICE_STORAGE_KEY = 'qlsv_device_id';
-const API_ENV_NAME = 'VITE_API_URL';
+const API_ENV_NAME = 'NEXT_PUBLIC_API_URL';
 const DEFAULT_API_BASE_URL = '/api';
 const normalizeApiBaseUrl = (value: unknown) => {
   const rawValue = String(value || '').trim();
@@ -25,7 +25,7 @@ const normalizeApiBaseUrl = (value: unknown) => {
   }
 };
 
-export const apiBaseUrl = normalizeApiBaseUrl(import.meta.env.VITE_API_URL);
+export const apiBaseUrl = normalizeApiBaseUrl(process.env.NEXT_PUBLIC_API_URL || '/api');
 let csrfTokenCache = '';
 let authTokenCache = '';
 const responseCache = new Map<string, { expiresAt: number; response: any }>();

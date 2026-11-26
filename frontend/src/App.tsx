@@ -1,3 +1,5 @@
+'use client';
+
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { lazy, Suspense, useEffect, type ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -6,31 +8,31 @@ import MainLayout from './layout/MainLayout';
 import RoleRoute from './components/RoleRoute';
 import { normalizeUserRole } from './utils/auth';
 
-const Login = lazy(() => import('./pages/Login'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Students = lazy(() => import('./pages/Students'));
-const TrainingScore = lazy(() => import('./pages/TrainingScore'));
-const Attendance = lazy(() => import('./pages/Attendance'));
-const EvaluationPage = lazy(() => import('./pages/Evaluation'));
-const StudentDashboard = lazy(() => import('./pages/StudentDashboard'));
-const QRAttendanceManager = lazy(() => import('./pages/QRAttendanceManager'));
-const QRScannerCheckIn = lazy(() => import('./pages/QRScannerCheckIn'));
-const StudentEvaluation = lazy(() => import('./pages/StudentEvaluation'));
-const StudentEvidence = lazy(() => import('./pages/StudentEvidence'));
-const AdminEvidenceReview = lazy(() => import('./pages/AdminEvidenceReview'));
-const AdminEvidenceImport = lazy(() => import('./pages/AdminEvidenceImport'));
-const AccountManagement = lazy(() => import('./pages/AccountManagement'));
-const AdminDRLManagement = lazy(() => import('./pages/AdminDRLManagement'));
-const Classes = lazy(() => import('./pages/Classes'));
-const Semesters = lazy(() => import('./pages/Semesters'));
-const TrainingScoreApproval = lazy(() => import('./pages/TrainingScoreApproval'));
-const TrainingScoreDetail = lazy(() => import('./pages/TrainingScoreDetail'));
-const TrainingStatistics = lazy(() => import('./pages/TrainingStatistics'));
-const BCHManagement = lazy(() => import('./pages/BCHManagement'));
-const Profile = lazy(() => import('./pages/Profile'));
-const PublicEventRegister = lazy(() => import('./pages/PublicEventRegister'));
-const EventManagement = lazy(() => import('./pages/EventManagement'));
-const SupportManagement = lazy(() => import('./pages/SupportManagement'));
+const Login = lazy(() => import('./legacy-pages/Login'));
+const Dashboard = lazy(() => import('./legacy-pages/Dashboard'));
+const Students = lazy(() => import('./legacy-pages/Students'));
+const TrainingScore = lazy(() => import('./legacy-pages/TrainingScore'));
+const Attendance = lazy(() => import('./legacy-pages/Attendance'));
+const EvaluationPage = lazy(() => import('./legacy-pages/Evaluation'));
+const StudentDashboard = lazy(() => import('./legacy-pages/StudentDashboard'));
+const QRAttendanceManager = lazy(() => import('./legacy-pages/QRAttendanceManager'));
+const QRScannerCheckIn = lazy(() => import('./legacy-pages/QRScannerCheckIn'));
+const StudentEvaluation = lazy(() => import('./legacy-pages/StudentEvaluation'));
+const StudentEvidence = lazy(() => import('./legacy-pages/StudentEvidence'));
+const AdminEvidenceReview = lazy(() => import('./legacy-pages/AdminEvidenceReview'));
+const AdminEvidenceImport = lazy(() => import('./legacy-pages/AdminEvidenceImport'));
+const AccountManagement = lazy(() => import('./legacy-pages/AccountManagement'));
+const AdminDRLManagement = lazy(() => import('./legacy-pages/AdminDRLManagement'));
+const Classes = lazy(() => import('./legacy-pages/Classes'));
+const Semesters = lazy(() => import('./legacy-pages/Semesters'));
+const TrainingScoreApproval = lazy(() => import('./legacy-pages/TrainingScoreApproval'));
+const TrainingScoreDetail = lazy(() => import('./legacy-pages/TrainingScoreDetail'));
+const TrainingStatistics = lazy(() => import('./legacy-pages/TrainingStatistics'));
+const BCHManagement = lazy(() => import('./legacy-pages/BCHManagement'));
+const Profile = lazy(() => import('./legacy-pages/Profile'));
+const PublicEventRegister = lazy(() => import('./legacy-pages/PublicEventRegister'));
+const EventManagement = lazy(() => import('./legacy-pages/EventManagement'));
+const SupportManagement = lazy(() => import('./legacy-pages/SupportManagement'));
 
 const PageFallback = () => (
   <div className="min-h-screen bg-slate-50 flex items-center justify-center">

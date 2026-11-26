@@ -30,10 +30,10 @@ class WebSocketClient {
   }
 
   private getUrl(): string {
-    const customUrl = (import.meta as any).env?.VITE_WS_URL;
+    const customUrl = process.env.NEXT_PUBLIC_WS_URL;
     if (customUrl) return customUrl;
 
-    const apiUrl = (import.meta as any).env?.VITE_API_URL || '/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
     if (apiUrl.startsWith('http')) {
       const wsProto = apiUrl.startsWith('https') ? 'wss:' : 'ws:';
       const parsed = new URL(apiUrl);

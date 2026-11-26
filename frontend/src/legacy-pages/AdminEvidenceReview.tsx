@@ -44,6 +44,13 @@ export default function AdminEvidenceReview() {
   const [loading, setLoading] = useState(true);
   const [semesters, setSemesters] = useState<any[]>([]);
   const [classes, setClasses] = useState<any[]>([]);
+  const uniqueClassIds = Array.from(
+    new Set(
+      classes
+        .map((item) => String(item?.id || '').trim())
+        .filter(Boolean),
+    ),
+  );
   
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -270,7 +277,11 @@ export default function AdminEvidenceReview() {
               ) : (
                 <>
                   <option value="">Tất cả lớp học</option>
-                  {classes.map(c => <option key={c.id} value={c.id}>{c.id}</option>)}
+                  {uniqueClassIds.map((classId) => (
+                    <option key={`class-${classId}`} value={classId}>
+                      {classId}
+                    </option>
+                  ))}
                 </>
               )}
             </select>

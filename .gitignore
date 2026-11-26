@@ -1,0 +1,14 @@
+node_modules/
+frontend/.next/
+frontend/out/
+backend/dist/
+*.tsbuildinfo
+qlsv2.rar
+
+# Local environment files
+.env
+frontend/.env
+backend/.env
+!.env.example
+!frontend/.env.example
+!backend/.env.example
