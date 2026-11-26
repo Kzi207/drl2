@@ -20,6 +20,17 @@ import { EVALUATION_DATA } from '../constants/evaluationData';
 import { normalizeEvidenceList, type EvidenceFile } from '../utils/evidence';
 import PreviewModal from '../components/drl/PreviewModal';
 
+const getSemesterList = (payload: unknown): any[] => {
+  if (Array.isArray(payload)) return payload;
+  if (payload && typeof payload === 'object') {
+    const value = payload as Record<string, unknown>;
+    for (const key of ['data', 'semesters', 'items']) {
+      if (Array.isArray(value[key])) return value[key] as any[];
+    }
+  }
+  return [];
+};
+
 const STATUS_BADGES: Record<string, { label: string; className: string; icon: any }> = {
   PENDING: {
     label: 'Chờ duyệt',
@@ -73,10 +84,11 @@ export default function StudentEvidence() {
   const fetchSemesters = async () => {
     try {
       const res = await api.get('/semesters');
-      setSemesters(res.data || []);
-      if (res.data.length > 0) {
-        setSelectedSemester(res.data[0].name);
-        setModalSemester(res.data[0].name);
+      const semesterList = getSemesterList(res.data);
+      setSemesters(semesterList);
+      if (semesterList.length > 0) {
+        setSelectedSemester(semesterList[0].name);
+        setModalSemester(semesterList[0].name);
       }
     } catch (error: any) {
       console.error('Không thể tải học kỳ');
