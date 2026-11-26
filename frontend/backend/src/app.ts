@@ -27,6 +27,8 @@ const __dirname = path.dirname(__filename);
 
 const envCandidates = [
   path.resolve(process.cwd(), '.env'),
+  path.resolve(process.cwd(), '../.env'),
+  path.resolve(process.cwd(), '../../frontend/.env'),
   path.resolve(process.cwd(), 'backend', '.env'),
   path.resolve(__dirname, '../.env'),
   path.resolve(__dirname, '../../.env'),
