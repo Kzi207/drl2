@@ -2,7 +2,9 @@
   "name": "qlsv2",
   "private": true,
   "version": "1.0.0",
-  "workspaces": ["frontend"],
+  "workspaces": [
+    "frontend"
+  ],
   "scripts": {
     "dev": "concurrently -k -n BACKEND,FRONTEND -c blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "npm --prefix frontend/backend run dev",
@@ -13,9 +15,13 @@
     "start": "concurrently -k -n BACKEND,FRONTEND -c blue,green \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "npm --prefix frontend/backend run start",
     "start:frontend": "npm --prefix frontend run start",
-    "install:all": "npm install && npm install --prefix frontend"
+    "install:all": "npm install && npm install --prefix frontend",
+    "build:vercel": "cd frontend && next build"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "next": "^16.0.1"
   }
 }
