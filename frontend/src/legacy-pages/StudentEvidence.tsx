@@ -31,6 +31,17 @@ const getSemesterList = (payload: unknown): any[] => {
   return [];
 };
 
+const getSubmissionList = (payload: unknown): any[] => {
+  if (Array.isArray(payload)) return payload;
+  if (payload && typeof payload === 'object') {
+    const value = payload as Record<string, unknown>;
+    for (const key of ['data', 'submissions', 'items', 'evidence']) {
+      if (Array.isArray(value[key])) return value[key] as any[];
+    }
+  }
+  return [];
+};
+
 const STATUS_BADGES: Record<string, { label: string; className: string; icon: any }> = {
   PENDING: {
     label: 'Chờ duyệt',
@@ -73,7 +84,7 @@ export default function StudentEvidence() {
     try {
       setLoading(true);
       const res = await api.get('/training/evidence/student');
-      setSubmissions(res.data || []);
+      setSubmissions(getSubmissionList(res.data));
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Không thể tải danh sách minh chứng');
     } finally {
