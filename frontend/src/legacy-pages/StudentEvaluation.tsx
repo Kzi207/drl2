@@ -5,6 +5,17 @@ import api from '../api/axios';
 import DetailedEvaluationForm from '../components/DetailedEvaluationForm';
 import { useAuthStore } from '../store/useAuthStore';
 
+const getSemesterList = (payload: unknown): any[] => {
+  if (Array.isArray(payload)) return payload;
+  if (payload && typeof payload === 'object') {
+    const value = payload as Record<string, unknown>;
+    for (const key of ['data', 'semesters', 'items']) {
+      if (Array.isArray(value[key])) return value[key] as any[];
+    }
+  }
+  return [];
+};
+
 const parseDetails = (raw: any): Record<string, { score: number; files: any[]; activities?: any[] }> => {
   let parsed = raw;
   for (let i = 0; i < 3; i += 1) {
@@ -72,9 +83,10 @@ export default function StudentEvaluation() {
   const fetchSemesters = async () => {
     try {
       const res = await api.get('/semesters');
-      setSemesterOptions(res.data);
-      if (res.data.length > 0) {
-        setSemester(res.data[0].name);
+      const semesters = getSemesterList(res.data);
+      setSemesterOptions(semesters);
+      if (semesters.length > 0) {
+        setSemester(semesters[0].name);
       }
     } catch (error: any) {
       console.error('Không thể tải danh sách học kỳ');
