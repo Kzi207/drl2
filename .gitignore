@@ -4,6 +4,7 @@ frontend/out/
 backend/dist/
 *.tsbuildinfo
 qlsv2.rar
+**/prisma/*.db
 
 # Local environment files
 .env

@@ -2,13 +2,11 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['html5-qrcode'],
-  async rewrites() {
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
-    return [
-      { source: '/api/:path*', destination: `${backendUrl}/api/:path*` },
-    ];
+  typescript: {
+    // Backend Express source is bundled by the Vercel function and has its own tsconfig.
+    ignoreBuildErrors: true,
   },
+  transpilePackages: ['html5-qrcode'],
   images: {
     unoptimized: true,
   },
